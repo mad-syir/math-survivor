@@ -31,6 +31,6 @@ public class BattleSystem : MonoBehaviour
         GameObject enemyObj = Instantiate(enemyPrefab, enemyBattleStation);
         enemyUnit = enemyObj.GetComponent<Unit>();
 
-        dialogueText.text = "An "+enemyUnit.name + " approaches..";
+        dialogueText.text = "A "+enemyUnit.name + " approaches..";
     }
 }
