@@ -13,6 +13,9 @@ public class BattleSystem : MonoBehaviour
     public GameObject playerPrefab;
     public GameObject enemyPrefab;//finding the object
 
+    public HealthSystem enemyHealth;
+    public HealthSystem playerHealth;
+
     public Transform playerBattleStation;//location of the object
     public Transform enemyBattleStation; //for good practice, make another gameobject that is a parent to the character to setup battlestation
 
@@ -32,5 +35,9 @@ public class BattleSystem : MonoBehaviour
         enemyUnit = enemyObj.GetComponent<Unit>();
 
         dialogueText.text = "A "+enemyUnit.name + " approaches..";
+
+        playerHealth.SetHUD(playerUnit);
+        enemyHealth.SetHUD(enemyUnit);
+
     }
 }

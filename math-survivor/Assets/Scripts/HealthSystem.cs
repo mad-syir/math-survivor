@@ -6,8 +6,12 @@ using UnityEngine.UI;
 public class HealthSystem : MonoBehaviour
 {
     public Slider slider;
-  
-    public void SetMaxHealth(int health)
+    public void SetHUD(Unit unit)
+    {
+        slider.maxValue = unit.maxHP;
+        slider.value = unit.currentHP;
+    }
+    public void SetMaxHealth(int health) //feels redundant might discard later
     {
         slider.maxValue = health;
         slider.value = health;
