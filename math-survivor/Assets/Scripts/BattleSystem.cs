@@ -20,6 +20,7 @@ public class BattleSystem : MonoBehaviour
     public Transform enemyBattleStation; //for good practice, make another gameobject that is a parent to the character to setup battlestation
 
     public Text dialogueText;
+    public bool isAttacking = false;
     void Start()
     {
         
@@ -54,14 +55,41 @@ public class BattleSystem : MonoBehaviour
         {
             state = BattleState.WON;
             //add winning screen or proceeds to the next levels
-            yield return new WaitForSeconds(2f);
-            //EndBattle();
+            //yield return new WaitForSeconds(2f);
+            EndBattle();
         }
         else
         {
             state = BattleState.ENEMYTURN;
+            enemyHealth.SetHealth(enemyUnit.currentHP);
+            dialogueText.text = "you deal " + playerUnit.damage + " damage";
+            
+
             yield return new WaitForSeconds(2f);
-            //coroutine enemyturn()
+            StartCoroutine(EnemyTurn());
+            //game over or fight until death
+        }
+    }
+    IEnumerator EnemyTurn()
+    {
+        //we can put logic to the enemy ai here
+        dialogueText.text = enemyUnit.name + " attacks!";
+
+        yield return new WaitForSeconds(1f);
+        bool isDead = playerUnit.Damage(enemyUnit.damage); //checking the status of the player
+        playerHealth.SetHealth(playerUnit.currentHP);
+        if (isDead)
+        {
+            state = BattleState.LOST;
+            //add lost screen or return to main menu
+            EndBattle();
+        }
+        else
+        {
+            state = BattleState.PLAYERTURN;
+            isAttacking = true;
+            PlayerTurn();
+            
             //game over or fight until death
         }
     }
@@ -69,5 +97,32 @@ public class BattleSystem : MonoBehaviour
     {
         dialogueText.text = "Choose your action...";
         
+    }
+
+    public void EndBattle()
+    {
+        if(state == BattleState.WON)
+        {
+            dialogueText.text = "You WON!!";
+        }
+        else if(state == BattleState.LOST)
+        {
+            dialogueText.text = "You LOST!!!!";
+        }
+        //make it so that it travels to the next scene/level
+    }
+    public void OnAttackButton()
+    {
+        //a selection of choices only 1 yields true and damages the enemy
+        //make player unable to attack after execute it once
+
+        if(state != BattleState.PLAYERTURN)
+        {
+            if (!isAttacking)
+            {
+                isAttacking = true;
+                StartCoroutine(PlayerAttack());
+            }
+        }
     }
 }
