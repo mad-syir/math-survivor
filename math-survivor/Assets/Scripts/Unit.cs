@@ -9,4 +9,18 @@ public class Unit : MonoBehaviour
     public int maxHP;
     public int currentHP;
 
+    public bool Damage(int damage)
+    {
+        currentHP -= damage;
+
+        if(currentHP <= 0)
+        {
+            /*currentHP = 0;*/
+            return true; //checking if the enemy is dead
+        }
+        else
+        {
+            return false;
+        }
+    }
 }

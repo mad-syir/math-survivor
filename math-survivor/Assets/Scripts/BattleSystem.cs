@@ -22,11 +22,13 @@ public class BattleSystem : MonoBehaviour
     public Text dialogueText;
     void Start()
     {
+        
         state = BattleState.START;
-        SetupBattle();
+        StartCoroutine(SetupBattle());
+        //Debug.Log("Player deals " + playerUnit.damage + " damage!");
     }
 
-    public void SetupBattle()
+    IEnumerator SetupBattle()
     {
         GameObject playerObj = Instantiate(playerPrefab, playerBattleStation); //getting reference of this instance
         playerUnit = playerObj.GetComponent<Unit>();
@@ -38,6 +40,34 @@ public class BattleSystem : MonoBehaviour
 
         playerHealth.SetHUD(playerUnit);
         enemyHealth.SetHUD(enemyUnit);
+        //maybe give 1-2 sec delay for turn to start
+        yield return new WaitForSeconds(2f);
+        state = BattleState.PLAYERTURN;
+        PlayerTurn();
+    }
 
+    IEnumerator PlayerAttack()
+    {
+        bool isDead = enemyUnit.Damage(playerUnit.damage); //player deals 5 damage (refer to the inspector)
+        
+        if (isDead)
+        {
+            state = BattleState.WON;
+            //add winning screen or proceeds to the next levels
+            yield return new WaitForSeconds(2f);
+            //EndBattle();
+        }
+        else
+        {
+            state = BattleState.ENEMYTURN;
+            yield return new WaitForSeconds(2f);
+            //coroutine enemyturn()
+            //game over or fight until death
+        }
+    }
+    public void PlayerTurn()
+    {
+        dialogueText.text = "Choose your action...";
+        
     }
 }
