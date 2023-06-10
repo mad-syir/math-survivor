@@ -20,6 +20,8 @@ public class BattleSystem : MonoBehaviour
     public Transform enemyBattleStation; //for good practice, make another gameobject that is a parent to the character to setup battlestation
 
     public Text dialogueText;
+    public Text playerHealthText;
+    public Text enemyHealthText;
     public bool isAttacking = false;
     void Start()
     {
@@ -38,7 +40,7 @@ public class BattleSystem : MonoBehaviour
         enemyUnit = enemyObj.GetComponent<Unit>();
 
         dialogueText.text = "A "+enemyUnit.name + " approaches..";
-
+        playerHealthText.text = playerUnit.currentHP.ToString();
         playerHealth.SetHUD(playerUnit);
         enemyHealth.SetHUD(enemyUnit);
         //maybe give 1-2 sec delay for turn to start
@@ -52,7 +54,7 @@ public class BattleSystem : MonoBehaviour
         bool isDead = enemyUnit.Damage(playerUnit.damage); //player deals 5 damage (refer to the inspector)
         dialogueText.text = "you deal " + playerUnit.damage + " damage";
         enemyHealth.SetHealth(enemyUnit.currentHP);
-
+        //todo
         if (isDead)
         {
             state = BattleState.WON;
@@ -81,6 +83,7 @@ public class BattleSystem : MonoBehaviour
         yield return new WaitForSeconds(1f);
         bool isDead = playerUnit.Damage(enemyUnit.damage); //checking the status of the player
         playerHealth.SetHealth(playerUnit.currentHP);
+        playerHealthText.text = playerUnit.currentHP.ToString();
         yield return new WaitForSeconds(1f);
         if (isDead)
         {
