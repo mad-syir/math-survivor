@@ -50,19 +50,22 @@ public class BattleSystem : MonoBehaviour
     IEnumerator PlayerAttack()
     {
         bool isDead = enemyUnit.Damage(playerUnit.damage); //player deals 5 damage (refer to the inspector)
-        
+        dialogueText.text = "you deal " + playerUnit.damage + " damage";
+        enemyHealth.SetHealth(enemyUnit.currentHP);
+
         if (isDead)
         {
             state = BattleState.WON;
             //add winning screen or proceeds to the next levels
-            //yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(2f);
             EndBattle();
         }
         else
         {
-            state = BattleState.ENEMYTURN;
-            enemyHealth.SetHealth(enemyUnit.currentHP);
+            
             dialogueText.text = "you deal " + playerUnit.damage + " damage";
+
+            state = BattleState.ENEMYTURN;
             
 
             yield return new WaitForSeconds(2f);
@@ -78,6 +81,7 @@ public class BattleSystem : MonoBehaviour
         yield return new WaitForSeconds(1f);
         bool isDead = playerUnit.Damage(enemyUnit.damage); //checking the status of the player
         playerHealth.SetHealth(playerUnit.currentHP);
+        yield return new WaitForSeconds(1f);
         if (isDead)
         {
             state = BattleState.LOST;
@@ -87,7 +91,7 @@ public class BattleSystem : MonoBehaviour
         else
         {
             state = BattleState.PLAYERTURN;
-            isAttacking = true;
+            //isAttacking = true;
             PlayerTurn();
             
             //game over or fight until death
@@ -118,11 +122,9 @@ public class BattleSystem : MonoBehaviour
 
         if(state != BattleState.PLAYERTURN)
         {
-            if (!isAttacking)
-            {
-                isAttacking = true;
-                StartCoroutine(PlayerAttack());
-            }
+            return;
         }
+        StartCoroutine(PlayerAttack());
+
     }
 }
