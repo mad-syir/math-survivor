@@ -1936,6 +1936,8 @@ MonoBehaviour:
   playerBattleStation: {fileID: 4419853996874595413, guid: 53215a163e4e1f34cafa6503e1746b81, type: 3}
   enemyBattleStation: {fileID: 1455064860802127642, guid: b6de1ded7c44b92478f903b29046c16d, type: 3}
   dialogueText: {fileID: 1307865135}
+  playerHealthText: {fileID: 57396800}
+  enemyHealthText: {fileID: 0}
   isAttacking: 0
 --- !u!4 &1981449379
 Transform:
