@@ -16,16 +16,19 @@ public class BattleSystem : MonoBehaviour
     public HealthSystem enemyHealth;
     public HealthSystem playerHealth;
 
+    public Questions question;
+
     public Transform playerBattleStation;//location of the object
     public Transform enemyBattleStation; //for good practice, make another gameobject that is a parent to the character to setup battlestation
 
+    public Text questionText;
     public Text dialogueText;
     public Text playerHealthText;
     public Text enemyHealthText;
     public bool isAttacking = false;
     void Start()
     {
-        
+        question = new Questions();
         state = BattleState.START;
         StartCoroutine(SetupBattle());
         //Debug.Log("Player deals " + playerUnit.damage + " damage!");
@@ -103,7 +106,8 @@ public class BattleSystem : MonoBehaviour
     public void PlayerTurn()
     {
         dialogueText.text = "Choose your action...";
-        
+        question.RandomAddition();
+        questionText.text = question.Num1 + " + " + question.Num2 + " + " + question.Sum + "(answer)";
     }
 
     public void EndBattle()
