@@ -45,6 +45,8 @@ public class BattleSystem : MonoBehaviour
         dialogueText.text = "A "+enemyUnit.name + " approaches..";
         playerHealthText.text = playerUnit.currentHP.ToString();
         playerHealth.SetHUD(playerUnit);
+
+        enemyHealthText.text = enemyUnit.currentHP.ToString();
         enemyHealth.SetHUD(enemyUnit);
         //maybe give 1-2 sec delay for turn to start
         yield return new WaitForSeconds(2f);
@@ -57,7 +59,8 @@ public class BattleSystem : MonoBehaviour
         bool isDead = enemyUnit.Damage(playerUnit.damage); //player deals 5 damage (refer to the inspector)
         dialogueText.text = "you deal " + playerUnit.damage + " damage";
         enemyHealth.SetHealth(enemyUnit.currentHP);
-        //todo
+        enemyHealthText.text = enemyUnit.currentHP.ToString();
+
         if (isDead)
         {
             state = BattleState.WON;
