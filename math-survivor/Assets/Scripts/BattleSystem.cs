@@ -58,10 +58,23 @@ public class BattleSystem : MonoBehaviour
 
     IEnumerator PlayerAttack()
     {
-        bool isDead = enemyUnit.Damage(playerUnit.damage); //player deals 5 damage (refer to the inspector)
-        dialogueText.text = "you deal " + playerUnit.damage + " damage";
-        enemyHealth.SetHealth(enemyUnit.currentHP);
-        enemyHealthText.text = enemyUnit.currentHP.ToString();
+        //int buttonValue = int.Parse(buttons.GetComponentInChildren<Text>().text); ;
+        bool isDead;
+        
+        /*if (buttonValue == question.Sum)
+        {*/
+            isDead = enemyUnit.Damage(playerUnit.damage); //player deals 5 damage (refer to the inspector)
+            dialogueText.text = "Correct! you deal " + playerUnit.damage + " damage";
+            enemyHealth.SetHealth(enemyUnit.currentHP);
+            enemyHealthText.text = enemyUnit.currentHP.ToString();
+       /* }
+        else
+        {*/
+            isDead = enemyUnit.Damage(0); //player deals 5 damage (refer to the inspector)
+            dialogueText.text = "Wrong! you deal 0 damage";
+            enemyHealth.SetHealth(enemyUnit.currentHP);
+            enemyHealthText.text = enemyUnit.currentHP.ToString();
+       /* }*/
 
         if (isDead)
         {
@@ -114,15 +127,25 @@ public class BattleSystem : MonoBehaviour
 
         foreach (Button button in buttons)
         {
-            button.interactable = false; //all buttons is started with false values
+            
+            //button.interactable = false; //all buttons is started with false values
+            button.GetComponentInChildren<Text>().text = question.FalseAnswers().ToString();
         }
 
         question.RandomAddition();
         questionText.text = question.Num1 + " + " + question.Num2 + " + " + question.Sum + "(answer)";
 
         int index = Random.Range(0, buttons.Length);
+
+        //debug
         //buttons[index].interactable = true; //only 1 is correct
         buttons[index].GetComponentInChildren<Text>().text = question.Sum.ToString();
+        //checking values
+        foreach (Button button in buttons)
+        {
+            Text buttonText = button.GetComponentInChildren<Text>();
+            Debug.Log(button.name + ": " + buttonText.text);
+        }
     }
 
     public void EndBattle()

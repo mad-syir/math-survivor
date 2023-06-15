@@ -58,10 +58,11 @@ public class Questions : MonoBehaviour
 
     public int FalseAnswers()
     {
-        int number1 = Random.Range(0, 10);
+        int number1 = Random.Range(0, 50);
         int number2 = Random.Range(0, 10);
         FalseSum = number1 + number2;
-
+        if (FalseSum == Sum)
+            FalseAnswers(); //recursion
         return FalseSum;
     }
 
