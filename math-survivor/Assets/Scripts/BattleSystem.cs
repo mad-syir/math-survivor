@@ -12,6 +12,7 @@ public class BattleSystem : MonoBehaviour
     private Unit enemyUnit;
     public GameObject playerPrefab;
     public GameObject enemyPrefab;//finding the object
+    public Button[] buttons;
 
     public HealthSystem enemyHealth;
     public HealthSystem playerHealth;
@@ -28,6 +29,7 @@ public class BattleSystem : MonoBehaviour
     public bool isAttacking = false;
     void Start()
     {
+        
         question = new Questions();
         state = BattleState.START;
         StartCoroutine(SetupBattle());
@@ -109,8 +111,18 @@ public class BattleSystem : MonoBehaviour
     public void PlayerTurn()
     {
         dialogueText.text = "Choose your action...";
+
+        foreach (Button button in buttons)
+        {
+            button.interactable = false; //all buttons is started with false values
+        }
+
         question.RandomAddition();
         questionText.text = question.Num1 + " + " + question.Num2 + " + " + question.Sum + "(answer)";
+
+        int index = Random.Range(0, buttons.Length);
+        //buttons[index].interactable = true; //only 1 is correct
+        buttons[index].GetComponentInChildren<Text>().text = question.Sum.ToString();
     }
 
     public void EndBattle()

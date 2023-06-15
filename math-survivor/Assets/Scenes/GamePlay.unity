@@ -2106,15 +2106,20 @@ MonoBehaviour:
   state: 0
   playerPrefab: {fileID: 4419853996874595415, guid: 53215a163e4e1f34cafa6503e1746b81, type: 3}
   enemyPrefab: {fileID: 1455064860802127640, guid: b6de1ded7c44b92478f903b29046c16d, type: 3}
+  buttons:
+  - {fileID: 236663662}
+  - {fileID: 898355845}
+  - {fileID: 1737992923}
+  - {fileID: 1757679972}
   enemyHealth: {fileID: 1732527309}
   playerHealth: {fileID: 881819970}
-  question: {fileID: 384233574}
+  question: {fileID: 0}
   playerBattleStation: {fileID: 4419853996874595413, guid: 53215a163e4e1f34cafa6503e1746b81, type: 3}
   enemyBattleStation: {fileID: 1455064860802127642, guid: b6de1ded7c44b92478f903b29046c16d, type: 3}
   questionText: {fileID: 384233572}
   dialogueText: {fileID: 1307865135}
   playerHealthText: {fileID: 57396800}
-  enemyHealthText: {fileID: 0}
+  enemyHealthText: {fileID: 1903288578}
   isAttacking: 0
 --- !u!4 &1981449379
 Transform:

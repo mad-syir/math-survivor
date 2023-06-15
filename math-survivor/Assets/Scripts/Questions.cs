@@ -1,12 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+
 
 public class Questions : MonoBehaviour
 {
     //make a simple math questions
-    int num1, num2, num3, sum;
+    int num1, num2, num3, sum, falseSum;
     public int Num1
     {
         get { return num1; }
@@ -22,16 +22,12 @@ public class Questions : MonoBehaviour
         get { return sum; }
         set { sum = value; }
     }
-
-    private void Start()
+    public int FalseSum
     {
-        //Debug.Log("sum is: " + RandomAddition());
+        get { return falseSum; }
+        set { falseSum = value; }
     }
 
-    /* public int GetNum3()
-     {
-         return num3;
-     }*/
     public int RandomAddition()
     {
 
@@ -60,5 +56,13 @@ public class Questions : MonoBehaviour
         }
     }
 
+    public int FalseAnswers()
+    {
+        int number1 = Random.Range(0, 10);
+        int number2 = Random.Range(0, 10);
+        FalseSum = number1 + number2;
+
+        return FalseSum;
+    }
 
 }
