@@ -70,10 +70,10 @@ public class BattleSystem : MonoBehaviour
        /* }
         else
         {*/
-            isDead = enemyUnit.Damage(0); //player deals 5 damage (refer to the inspector)
+            /*isDead = enemyUnit.Damage(0); //player deals 5 damage (refer to the inspector)
             dialogueText.text = "Wrong! you deal 0 damage";
             enemyHealth.SetHealth(enemyUnit.currentHP);
-            enemyHealthText.text = enemyUnit.currentHP.ToString();
+            enemyHealthText.text = enemyUnit.currentHP.ToString();*/
        /* }*/
 
         if (isDead)
@@ -85,8 +85,8 @@ public class BattleSystem : MonoBehaviour
         }
         else
         {
-            
-            dialogueText.text = "you deal " + playerUnit.damage + " damage";
+
+           
 
             state = BattleState.ENEMYTURN;
             
