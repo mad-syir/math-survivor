@@ -85,6 +85,15 @@ public class BattleSystem : MonoBehaviour
             //game over or fight until death
         }
     }
+
+    IEnumerator WrongAnswers()
+    {
+        dialogueText.text = "Wrong answer! Your attack missed.";
+        yield return new WaitForSeconds(2f);
+        state = BattleState.ENEMYTURN;
+        StartCoroutine(EnemyTurn());
+    }
+
     IEnumerator EnemyTurn()
     {
         //we can put logic to the enemy ai here
@@ -166,9 +175,8 @@ public class BattleSystem : MonoBehaviour
             }
             else
             {
-                dialogueText.text = "Wrong answer! Your attack missed.";
-                state = BattleState.ENEMYTURN;
-                StartCoroutine(EnemyTurn());
+                
+                StartCoroutine(WrongAnswers());
             }
         }
     }
