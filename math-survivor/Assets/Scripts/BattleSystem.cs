@@ -58,23 +58,12 @@ public class BattleSystem : MonoBehaviour
 
     IEnumerator PlayerAttack()
     {
-        //int buttonValue = int.Parse(buttons.GetComponentInChildren<Text>().text); ;
-        bool isDead;
         
-        /*if (buttonValue == question.Sum)
-        {*/
-            isDead = enemyUnit.Damage(playerUnit.damage); //player deals 5 damage (refer to the inspector)
+        bool isDead = enemyUnit.Damage(playerUnit.damage); //player deals 5 damage (refer to the inspector)
             dialogueText.text = "Correct! you deal " + playerUnit.damage + " damage";
             enemyHealth.SetHealth(enemyUnit.currentHP);
             enemyHealthText.text = enemyUnit.currentHP.ToString();
-       /* }
-        else
-        {*/
-            /*isDead = enemyUnit.Damage(0); //player deals 5 damage (refer to the inspector)
-            dialogueText.text = "Wrong! you deal 0 damage";
-            enemyHealth.SetHealth(enemyUnit.currentHP);
-            enemyHealthText.text = enemyUnit.currentHP.ToString();*/
-       /* }*/
+       
 
         if (isDead)
         {
@@ -165,11 +154,22 @@ public class BattleSystem : MonoBehaviour
         //a selection of choices only 1 yields true and damages the enemy
         //make player unable to attack after execute it once
 
-        if(state != BattleState.PLAYERTURN)
-        {
-            return;
-        }
-        StartCoroutine(PlayerAttack());
+        Button selectedButton = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.GetComponent<Button>();
+        string buttonText = selectedButton.GetComponentInChildren<Text>().text;
 
+        int selectedValue;
+        if (int.TryParse(buttonText, out selectedValue))
+        {
+            if (selectedValue == question.Sum)
+            {
+                StartCoroutine(PlayerAttack());
+            }
+            else
+            {
+                dialogueText.text = "Wrong answer! Your attack missed.";
+                state = BattleState.ENEMYTURN;
+                StartCoroutine(EnemyTurn());
+            }
+        }
     }
 }
