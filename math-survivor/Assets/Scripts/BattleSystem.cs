@@ -36,6 +36,11 @@ public class BattleSystem : MonoBehaviour
         StartCoroutine(SetupBattle());
         //Debug.Log("Player deals " + playerUnit.damage + " damage!");
     }
+    //calls once per frame
+    private void Update()
+    {
+        
+    }
 
     IEnumerator SetupBattle()
     {
@@ -132,7 +137,7 @@ public class BattleSystem : MonoBehaviour
         }
 
         question.RandomAddition();
-        questionText.text = question.Num1 + " + " + question.Num2 + " + " + question.Sum + "(answer)";
+        questionText.text = question.Num1 + " + " + question.Num2 + " = " + "???";
 
         int index = Random.Range(0, buttons.Length);
 
