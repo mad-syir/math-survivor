@@ -29,8 +29,9 @@ public class BattleSystem : MonoBehaviour
     public bool isAttacking = false;
     void Start()
     {
-        
-        question = new Questions();
+
+        //question = new Questions();
+        question = gameObject.AddComponent<Questions>();
         state = BattleState.START;
         StartCoroutine(SetupBattle());
         //Debug.Log("Player deals " + playerUnit.damage + " damage!");
