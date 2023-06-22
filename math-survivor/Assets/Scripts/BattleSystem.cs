@@ -128,7 +128,7 @@ public class BattleSystem : MonoBehaviour
     public void PlayerTurn()
     {
         dialogueText.text = "Choose your action...";
-
+        question.RandomAddition();
         foreach (Button button in buttons)
         {
             
@@ -136,7 +136,7 @@ public class BattleSystem : MonoBehaviour
             button.GetComponentInChildren<Text>().text = question.FalseAnswers().ToString();
         }
 
-        question.RandomAddition();
+        
         questionText.text = question.Num1 + " + " + question.Num2 + " = " + "???";
 
         int index = Random.Range(0, buttons.Length);
