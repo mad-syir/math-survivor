@@ -95,8 +95,9 @@ public class BattleSystem : MonoBehaviour
     IEnumerator WrongAnswers()
     {
         dialogueText.text = "Wrong answer! Your attack missed.";
-        yield return new WaitForSeconds(2f);
         state = BattleState.ENEMYTURN;
+        yield return new WaitForSeconds(2f);
+        
         StartCoroutine(EnemyTurn());
     }
 
@@ -168,6 +169,9 @@ public class BattleSystem : MonoBehaviour
     {
         //a selection of choices only 1 yields true and damages the enemy
         //make player unable to attack after execute it once
+
+        if (state != BattleState.PLAYERTURN)
+            return;
 
         Button selectedButton = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.GetComponent<Button>();
         string buttonText = selectedButton.GetComponentInChildren<Text>().text;
