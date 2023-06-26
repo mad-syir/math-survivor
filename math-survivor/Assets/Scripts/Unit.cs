@@ -65,7 +65,7 @@ public class Unit : MonoBehaviour
     }
     public void EnemyDied()
     {
-        animator.SetBool("enemyDead", true);
+        animator.SetBool("enemyDied", true);
 
 
         //animator.SetBool("attack", false);
