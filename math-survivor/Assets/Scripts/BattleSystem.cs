@@ -76,7 +76,7 @@ public class BattleSystem : MonoBehaviour
             enemyHealth.SetHealth(enemyUnit.currentHP);
             enemyHealthText.text = enemyUnit.currentHP.ToString();
 
-        playerUnit.CharacterAnimate(attack);
+        playerUnit.CharacterSlash(attack);
 
         if (isDead)
         {
@@ -111,6 +111,9 @@ public class BattleSystem : MonoBehaviour
     IEnumerator EnemyTurn()
     {
         //we can put logic to the enemy ai here
+        bool attack = false;
+        playerUnit.CharacterSlash(attack);//ends anim here
+
         dialogueText.text = enemyUnit.name + " attacks!";
 
         yield return new WaitForSeconds(1f);
@@ -169,6 +172,7 @@ public class BattleSystem : MonoBehaviour
         else if(state == BattleState.LOST)
         {
             dialogueText.text = "You LOST!!!!";
+            playerUnit.CharacterDied();
         }
         //make it so that it travels to the next scene/level
     }

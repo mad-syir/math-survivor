@@ -21,7 +21,7 @@ public class Unit : MonoBehaviour
 
         if(currentHP <= 0)
         {
-            /*currentHP = 0;*/
+            currentHP = 0;
             return true; //checking if the enemy is dead
         }
         else
@@ -29,9 +29,26 @@ public class Unit : MonoBehaviour
             return false;
         }
     }
-    public void CharacterAnimate(bool damaged)
+    public void CharacterSlash(bool damaged)
     {
-        animator.SetBool("attack", true);
+        if(damaged){
+            animator.SetBool("attack", true);
+            return;
+        }
+        else
+        {
+            animator.SetBool("attack", false);
+        }
         
+        //animator.SetBool("attack", false);
+
+    }
+    public void CharacterDied()
+    {
+        animator.SetBool("Dead", true);
+        
+
+        //animator.SetBool("attack", false);
+
     }
 }

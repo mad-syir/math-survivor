@@ -45,8 +45,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f46335ad16c40e543ad7d911aa44630b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 0}
   name: zombie
-  damage: 4
+  damage: 100
   maxHP: 20
   currentHP: 20
 --- !u!1 &5448218964286585992

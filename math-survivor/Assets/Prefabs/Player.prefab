@@ -46,11 +46,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f46335ad16c40e543ad7d911aa44630b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 7359915374753721144}
   name: Player
   damage: 5
   maxHP: 70
   currentHP: 55
-  animator: {fileID: 7359915374753721144}
 --- !u!212 &1946091332688149126
 SpriteRenderer:
   m_ObjectHideFlags: 0
