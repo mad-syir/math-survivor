@@ -11,10 +11,7 @@ public class Unit : MonoBehaviour
     public int maxHP;
     public int currentHP;
 
-    /*private void Awake()
-    {
-        animator = gameObject.GetComponent<Animator>();
-    }*/
+    
     public bool Damage(int damage)
     {
         currentHP -= damage;

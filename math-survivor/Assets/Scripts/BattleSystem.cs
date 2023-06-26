@@ -70,9 +70,12 @@ public class BattleSystem : MonoBehaviour
 
     IEnumerator PlayerAttack()
     {
-        bool attack = true;
+        bool attack = false;
+        enemyUnit.CharacterSlash(attack);
+        attack = true;
+        
         bool isDead = enemyUnit.Damage(playerUnit.damage); //player deals 5 damage (refer to the inspector)
-            dialogueText.text = "Correct! you deal " + playerUnit.damage + " damage";
+            dialogueText.text = "Well struck!";
             enemyHealth.SetHealth(enemyUnit.currentHP);
             enemyHealthText.text = enemyUnit.currentHP.ToString();
 
@@ -101,7 +104,7 @@ public class BattleSystem : MonoBehaviour
 
     IEnumerator WrongAnswers()
     {
-        dialogueText.text = "Wrong answer! Your attack missed.";
+        dialogueText.text = "Miss!";
         state = BattleState.ENEMYTURN;
         yield return new WaitForSeconds(2f);
         
@@ -120,6 +123,9 @@ public class BattleSystem : MonoBehaviour
         bool isDead = playerUnit.Damage(enemyUnit.damage); //checking the status of the player
         playerHealth.SetHealth(playerUnit.currentHP);
         playerHealthText.text = playerUnit.currentHP.ToString();
+
+        attack = true; //bad practice too bad
+        enemyUnit.CharacterSlash(attack);
         yield return new WaitForSeconds(1f);
         if (isDead)
         {
@@ -168,6 +174,7 @@ public class BattleSystem : MonoBehaviour
         if(state == BattleState.WON)
         {
             dialogueText.text = "You WON!!";
+            enemyUnit.CharacterDied();
         }
         else if(state == BattleState.LOST)
         {

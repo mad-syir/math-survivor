@@ -50,7 +50,7 @@ MonoBehaviour:
   name: Player
   damage: 5
   maxHP: 70
-  currentHP: 55
+  currentHP: 70
 --- !u!212 &1946091332688149126
 SpriteRenderer:
   m_ObjectHideFlags: 0
