@@ -41,7 +41,7 @@ public class Questions : MonoBehaviour
     public int RandomSubtraction()
     {
 
-        Num1 = Random.Range(0, 10);
+        Num1 = Random.Range(0, 10); //you can change difficulty by changing the values of 10 to something else
         Num2 = Random.Range(0, 10);
         //int num3 = Random.Range(0, 10);
 

@@ -22,11 +22,17 @@ public class BattleSystem : MonoBehaviour
     public Transform playerBattleStation;//location of the object
     public Transform enemyBattleStation; //for good practice, make another gameobject that is a parent to the character to setup battlestation
 
+    //public Animator animator;
+
     public Text questionText;
     public Text dialogueText;
     public Text playerHealthText;
     public Text enemyHealthText;
     public bool isAttacking = false;
+
+    [SerializeField]
+    public int selectedValue;
+    
     void Start()
     {
 
@@ -64,12 +70,15 @@ public class BattleSystem : MonoBehaviour
 
     IEnumerator PlayerAttack()
     {
+        bool attack = true;
+        
         
         bool isDead = enemyUnit.Damage(playerUnit.damage); //player deals 5 damage (refer to the inspector)
-            dialogueText.text = "Correct! you deal " + playerUnit.damage + " damage";
+            dialogueText.text = "Well struck!";
             enemyHealth.SetHealth(enemyUnit.currentHP);
             enemyHealthText.text = enemyUnit.currentHP.ToString();
-       
+
+        playerUnit.CharacterSlash(attack);
 
         if (isDead)
         {
@@ -94,22 +103,32 @@ public class BattleSystem : MonoBehaviour
 
     IEnumerator WrongAnswers()
     {
-        dialogueText.text = "Wrong answer! Your attack missed.";
-        yield return new WaitForSeconds(2f);
+        dialogueText.text = "Miss!";
         state = BattleState.ENEMYTURN;
+        yield return new WaitForSeconds(2f);
+        
         StartCoroutine(EnemyTurn());
     }
 
     IEnumerator EnemyTurn()
     {
         //we can put logic to the enemy ai here
+        bool attack = false;
+        playerUnit.CharacterSlash(attack);//ends anim here
+
         dialogueText.text = enemyUnit.name + " attacks!";
 
         yield return new WaitForSeconds(1f);
         bool isDead = playerUnit.Damage(enemyUnit.damage); //checking the status of the player
         playerHealth.SetHealth(playerUnit.currentHP);
         playerHealthText.text = playerUnit.currentHP.ToString();
-        yield return new WaitForSeconds(1f);
+
+        attack = true; //bad practice too bad
+        enemyUnit.EnemySlash(attack);
+        yield return new WaitForSeconds(2f);
+        attack = false;
+        enemyUnit.EnemySlash(attack);
+        
         if (isDead)
         {
             state = BattleState.LOST;
@@ -157,10 +176,12 @@ public class BattleSystem : MonoBehaviour
         if(state == BattleState.WON)
         {
             dialogueText.text = "You WON!!";
+            enemyUnit.EnemyDied();
         }
         else if(state == BattleState.LOST)
         {
             dialogueText.text = "You LOST!!!!";
+            playerUnit.CharacterDied();
         }
         //make it so that it travels to the next scene/level
     }
@@ -169,10 +190,13 @@ public class BattleSystem : MonoBehaviour
         //a selection of choices only 1 yields true and damages the enemy
         //make player unable to attack after execute it once
 
+        if (state != BattleState.PLAYERTURN)
+            return;
+
         Button selectedButton = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.GetComponent<Button>();
         string buttonText = selectedButton.GetComponentInChildren<Text>().text;
 
-        int selectedValue;
+        
         if (int.TryParse(buttonText, out selectedValue))
         {
             if (selectedValue == question.Sum)
@@ -186,4 +210,6 @@ public class BattleSystem : MonoBehaviour
             }
         }
     }
+
+    
 }
