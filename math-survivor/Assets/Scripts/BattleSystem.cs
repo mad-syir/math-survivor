@@ -22,11 +22,17 @@ public class BattleSystem : MonoBehaviour
     public Transform playerBattleStation;//location of the object
     public Transform enemyBattleStation; //for good practice, make another gameobject that is a parent to the character to setup battlestation
 
+    //public Animator animator;
+
     public Text questionText;
     public Text dialogueText;
     public Text playerHealthText;
     public Text enemyHealthText;
     public bool isAttacking = false;
+
+    [SerializeField]
+    public int selectedValue;
+    
     void Start()
     {
 
@@ -64,12 +70,13 @@ public class BattleSystem : MonoBehaviour
 
     IEnumerator PlayerAttack()
     {
-        
+        bool attack = true;
         bool isDead = enemyUnit.Damage(playerUnit.damage); //player deals 5 damage (refer to the inspector)
             dialogueText.text = "Correct! you deal " + playerUnit.damage + " damage";
             enemyHealth.SetHealth(enemyUnit.currentHP);
             enemyHealthText.text = enemyUnit.currentHP.ToString();
-       
+
+        playerUnit.CharacterAnimate(attack);
 
         if (isDead)
         {
@@ -176,7 +183,7 @@ public class BattleSystem : MonoBehaviour
         Button selectedButton = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.GetComponent<Button>();
         string buttonText = selectedButton.GetComponentInChildren<Text>().text;
 
-        int selectedValue;
+        
         if (int.TryParse(buttonText, out selectedValue))
         {
             if (selectedValue == question.Sum)
@@ -190,4 +197,6 @@ public class BattleSystem : MonoBehaviour
             }
         }
     }
+
+    
 }

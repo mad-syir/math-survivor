@@ -4,11 +4,17 @@ using UnityEngine;
 
 public class Unit : MonoBehaviour
 {
-    public string name;
+    public Animator animator;
+    
+    public new string name;
     public int damage;
     public int maxHP;
     public int currentHP;
 
+    private void Awake()
+    {
+        animator = gameObject.GetComponent<Animator>();
+    }
     public bool Damage(int damage)
     {
         currentHP -= damage;
@@ -22,5 +28,10 @@ public class Unit : MonoBehaviour
         {
             return false;
         }
+    }
+    public void CharacterAnimate(bool damaged)
+    {
+        animator.SetBool("attack", true);
+        
     }
 }

@@ -50,6 +50,7 @@ MonoBehaviour:
   damage: 5
   maxHP: 70
   currentHP: 55
+  animator: {fileID: 7359915374753721144}
 --- !u!212 &1946091332688149126
 SpriteRenderer:
   m_ObjectHideFlags: 0
