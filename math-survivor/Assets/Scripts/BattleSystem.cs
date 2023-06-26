@@ -70,9 +70,8 @@ public class BattleSystem : MonoBehaviour
 
     IEnumerator PlayerAttack()
     {
-        bool attack = false;
-        enemyUnit.CharacterSlash(attack);
-        attack = true;
+        bool attack = true;
+        
         
         bool isDead = enemyUnit.Damage(playerUnit.damage); //player deals 5 damage (refer to the inspector)
             dialogueText.text = "Well struck!";
@@ -125,8 +124,11 @@ public class BattleSystem : MonoBehaviour
         playerHealthText.text = playerUnit.currentHP.ToString();
 
         attack = true; //bad practice too bad
-        enemyUnit.CharacterSlash(attack);
-        yield return new WaitForSeconds(1f);
+        enemyUnit.EnemySlash(attack);
+        yield return new WaitForSeconds(2f);
+        attack = false;
+        enemyUnit.EnemySlash(attack);
+        
         if (isDead)
         {
             state = BattleState.LOST;
@@ -174,7 +176,7 @@ public class BattleSystem : MonoBehaviour
         if(state == BattleState.WON)
         {
             dialogueText.text = "You WON!!";
-            enemyUnit.CharacterDied();
+            enemyUnit.EnemyDied();
         }
         else if(state == BattleState.LOST)
         {

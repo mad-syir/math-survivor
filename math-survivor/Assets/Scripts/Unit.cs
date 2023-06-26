@@ -48,4 +48,27 @@ public class Unit : MonoBehaviour
         //animator.SetBool("attack", false);
 
     }
+    public void EnemySlash(bool damaged)
+    {
+        if (damaged)
+        {
+            animator.SetBool("enemyAttack", true);
+            return;
+        }
+        else
+        {
+            animator.SetBool("enemyAttack", false);
+        }
+
+        //animator.SetBool("attack", false);
+
+    }
+    public void EnemyDied()
+    {
+        animator.SetBool("enemyDead", true);
+
+
+        //animator.SetBool("attack", false);
+
+    }
 }
