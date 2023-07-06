@@ -66,4 +66,31 @@ public class Questions : MonoBehaviour
         return FalseSum;
     }
 
+    public int RandomRepeatedAddition()
+    {
+        Num1 = Random.Range(0, 10);
+        Num2 = Random.Range(3, 4);// how many time to repeat
+
+        sum = Num1 * Num2;
+        return sum;
+    }
+    public int RandomRepeatedSubtraction()
+    {
+        Num1 = Random.Range(0, 10);// the number to repeat
+        Num2 = Random.Range(3, 4);// how many time to repeat
+        sum = Num1 * Num2;
+        /**
+        The return vallue of this method, along with RandomAddition, RandomSubtraction, and 
+        RandomRepeatedAddition is not used on the correct answer button. The button takes the "sum" value,
+        not the value returned. I dont know where the return value is used.
+        What I know is that I need Num1 as the answer. So I swapped them.
+        sum and Num1 is swapped using another int (temp). 
+        temp takes value from sum, sum takes value from Num1, Num1 takes value from temp.
+        **/
+        int temp;
+        temp = sum;
+        sum = Num1;
+        Num1 = temp;
+        return sum;
+    }
 }

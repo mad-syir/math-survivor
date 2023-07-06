@@ -8,7 +8,10 @@ public enum BattleState { START, PLAYERTURN, ENEMYTURN, WON, LOST }
 public class BattleSystem : MonoBehaviour
 {
     [Tooltip("Check for addition question. uncheck for subtraction")][SerializeField] private bool additionBool;
+    [Tooltip("Check for repeated operation. uncheck for single operation")][SerializeField] private bool repeatedBool;
+    [Tooltip("Randomize additionBol and repeatedBool")][SerializeField] private bool randomizeAllTypeOfQuestion;
     [Tooltip("Activate inactive button after winning")][SerializeField] private GameObject nextSceneButton;
+
     public BattleState state;
     private Unit playerUnit;
     private Unit enemyUnit;
@@ -149,13 +152,41 @@ public class BattleSystem : MonoBehaviour
     public void PlayerTurn()
     {
         dialogueText.text = "Choose your action...";
-        if (additionBool)
+        // randomize question type
+        if (randomizeAllTypeOfQuestion)
         {
-            question.RandomAddition();
+            repeatedBool = Random.Range(0, 2) > 0.5;
+            additionBool = Random.Range(0, 2) > 0.5;
+
+            Debug.Log("repeatedBool: " + repeatedBool);
+            Debug.Log("additionBool: " + additionBool);
         }
-        else if (!additionBool)
+        // generate question
+        if (!repeatedBool)
         {
-            question.RandomSubtraction();
+            if (additionBool)
+            {
+                question.RandomAddition();
+                // module tambah
+            }
+            else if (!additionBool)
+            {
+                question.RandomSubtraction();
+                // module tolak
+            }
+        }
+        else if (repeatedBool)
+        {
+            if (additionBool)
+            {
+                question.RandomRepeatedAddition();
+                // module tambah berulang
+            }
+            else if (!additionBool)
+            {
+                question.RandomRepeatedSubtraction();
+                // module tolak berulang
+            }
         }
 
         foreach (Button button in buttons)
@@ -164,14 +195,42 @@ public class BattleSystem : MonoBehaviour
             button.GetComponentInChildren<Text>().text = question.FalseAnswers().ToString();
         }
 
-        
-        if (additionBool)
+        // prints question above zaombeh
+        if (!repeatedBool)
         {
-            questionText.text = question.Num1 + " + " + question.Num2 + " = " + "???";
+            if (additionBool)
+            {
+                questionText.text = question.Num1 + " + " + question.Num2 + " = " + "???";
+                // module tambah
+            }
+            else if (!additionBool)
+            {
+                questionText.text = question.Num1 + " - " + question.Num2 + " = " + "???";
+                // module tolak
+            }
         }
-        else if (!additionBool)
+        else if (repeatedBool)
         {
-            questionText.text = question.Num1 + " - " + question.Num2 + " = " + "???";
+            questionText.text ="";
+            if (additionBool)
+            {
+                for (int i = 0; i < (question.Num2 - 1); i++)
+                {
+                    questionText.text += question.Num1 + " + ";
+                }
+                    questionText.text += question.Num1+" = ???";
+                // module tambah berulang
+            }
+            else if (!additionBool)
+            {
+                questionText.text = question.Num1 + " - ";
+                for (int i = 0; i < (question.Num2 - 1); i++)
+                {
+                    questionText.text += "? - ";
+                }
+                    questionText.text += "? = 0";
+                // module tolak berulang
+            }
         }
 
         int index = Random.Range(0, buttons.Length);
