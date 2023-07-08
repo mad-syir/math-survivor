@@ -1342,7 +1342,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -516, y: 139}
+  m_AnchoredPosition: {x: -516, y: 0}
   m_SizeDelta: {x: 136.01, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &915345676
@@ -1847,7 +1847,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -486, y: 135}
+  m_AnchoredPosition: {x: -486, y: 0}
   m_SizeDelta: {x: 136.01, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1398183908
@@ -2778,6 +2778,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   additionBool: 0
   repeatedBool: 1
+  randomizeAllTypeOfQuestion: 0
   nextSceneButton: {fileID: 815958065}
   state: 0
   playerPrefab: {fileID: 4419853996874595415, guid: 53215a163e4e1f34cafa6503e1746b81, type: 3}
