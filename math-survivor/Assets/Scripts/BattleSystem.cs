@@ -7,6 +7,8 @@ public enum BattleState { START, PLAYERTURN, ENEMYTURN, WON, LOST }
 
 public class BattleSystem : MonoBehaviour
 {
+    [Tooltip("Check for addition question. uncheck for subtraction")][SerializeField] private bool additionBool;
+    [Tooltip("Activate inactive button after winning")][SerializeField] private GameObject nextSceneButton;
     public BattleState state;
     private Unit playerUnit;
     private Unit enemyUnit;
@@ -147,16 +149,30 @@ public class BattleSystem : MonoBehaviour
     public void PlayerTurn()
     {
         dialogueText.text = "Choose your action...";
-        question.RandomAddition();
+        if (additionBool)
+        {
+            question.RandomAddition();
+        }
+        else if (!additionBool)
+        {
+            question.RandomSubtraction();
+        }
+
         foreach (Button button in buttons)
         {
-            
             //button.interactable = false; //all buttons is started with false values
             button.GetComponentInChildren<Text>().text = question.FalseAnswers().ToString();
         }
 
         
-        questionText.text = question.Num1 + " + " + question.Num2 + " = " + "???";
+        if (additionBool)
+        {
+            questionText.text = question.Num1 + " + " + question.Num2 + " = " + "???";
+        }
+        else if (!additionBool)
+        {
+            questionText.text = question.Num1 + " - " + question.Num2 + " = " + "???";
+        }
 
         int index = Random.Range(0, buttons.Length);
 
@@ -184,6 +200,7 @@ public class BattleSystem : MonoBehaviour
             playerUnit.CharacterDied();
         }
         //make it so that it travels to the next scene/level
+        nextSceneButton.SetActive(true);
     }
     public void OnAttackButton()
     {
