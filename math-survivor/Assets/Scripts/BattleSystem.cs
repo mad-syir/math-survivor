@@ -46,6 +46,7 @@ public class BattleSystem : MonoBehaviour
         question = gameObject.AddComponent<Questions>();
         state = BattleState.START;
         StartCoroutine(SetupBattle());
+        
         //Debug.Log("Player deals " + playerUnit.damage + " damage!");
     }
     //calls once per frame
@@ -253,16 +254,18 @@ public class BattleSystem : MonoBehaviour
         {
             dialogueText.text = "You WON!!";
             enemyUnit.EnemyDied();
-            
+            //make it so that it travels to the next scene/level
+            nextSceneButton.SetActive(true);
+
         }
         else if(state == BattleState.LOST)
         {
             dialogueText.text = "You LOST!!!!";
             playerUnit.CharacterDied();
-            nextSceneLost.SetActive(true);
+            FindObjectOfType<Manager>().DeathScreen(); //accessing game over script
+
         }
-        //make it so that it travels to the next scene/level
-        nextSceneButton.SetActive(true);
+        
     }
     public void OnAttackButton()
     {
