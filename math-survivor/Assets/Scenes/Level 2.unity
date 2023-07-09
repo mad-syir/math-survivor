@@ -2780,9 +2780,10 @@ MonoBehaviour:
   repeatedBool: 0
   randomizeAllTypeOfQuestion: 0
   nextSceneButton: {fileID: 815958065}
+  nextSceneLost: {fileID: 0}
   state: 0
   playerPrefab: {fileID: 4419853996874595415, guid: 53215a163e4e1f34cafa6503e1746b81, type: 3}
-  enemyPrefab: {fileID: 1455064860802127640, guid: b6de1ded7c44b92478f903b29046c16d, type: 3}
+  enemyPrefab: {fileID: 1455064860802127640, guid: 605a4bedc0c08af44a544030458f64f4, type: 3}
   buttons:
   - {fileID: 236663662}
   - {fileID: 898355845}
