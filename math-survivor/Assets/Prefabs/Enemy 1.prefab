@@ -47,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 4545013071202522650}
   name: zombie
-  damage: 100
+  damage: 10
   maxHP: 15
   currentHP: 15
 --- !u!1 &5448218964286585992
