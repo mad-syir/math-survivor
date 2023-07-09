@@ -2776,13 +2776,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff7f847f18c8896419ff9ad0079c8dc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  additionBool: 1
+  additionBool: 0
   repeatedBool: 1
   randomizeAllTypeOfQuestion: 0
   nextSceneButton: {fileID: 815958065}
+  nextSceneLost: {fileID: 0}
   state: 0
   playerPrefab: {fileID: 4419853996874595415, guid: 53215a163e4e1f34cafa6503e1746b81, type: 3}
-  enemyPrefab: {fileID: 1455064860802127640, guid: b6de1ded7c44b92478f903b29046c16d, type: 3}
+  enemyPrefab: {fileID: 1455064860802127640, guid: f83163bc8b5470341bb27c4d2c275141, type: 3}
   buttons:
   - {fileID: 236663662}
   - {fileID: 898355845}
