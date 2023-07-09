@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public enum BattleState { START, PLAYERTURN, ENEMYTURN, WON, LOST }
 
@@ -262,10 +263,14 @@ public class BattleSystem : MonoBehaviour
         {
             dialogueText.text = "You LOST!!!!";
             playerUnit.CharacterDied();
-            FindObjectOfType<Manager>().DeathScreen(); //accessing game over script
-
+            Invoke("DeathScreen", 5f);
         }
         
+    }
+
+    void DeathScreen()
+    {
+        SceneManager.LoadScene("GameOver");
     }
     public void OnAttackButton()
     {
