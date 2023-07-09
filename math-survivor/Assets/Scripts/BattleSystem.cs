@@ -11,6 +11,7 @@ public class BattleSystem : MonoBehaviour
     [Tooltip("Check for repeated operation. uncheck for single operation")][SerializeField] private bool repeatedBool;
     [Tooltip("Randomize additionBol and repeatedBool")][SerializeField] private bool randomizeAllTypeOfQuestion;
     [Tooltip("Activate inactive button after winning")][SerializeField] private GameObject nextSceneButton;
+    [Tooltip("Activate inactive button after losing")] [SerializeField] private GameObject nextSceneLost;
 
     public BattleState state;
     private Unit playerUnit;
@@ -252,11 +253,13 @@ public class BattleSystem : MonoBehaviour
         {
             dialogueText.text = "You WON!!";
             enemyUnit.EnemyDied();
+            
         }
         else if(state == BattleState.LOST)
         {
             dialogueText.text = "You LOST!!!!";
             playerUnit.CharacterDied();
+            nextSceneLost.SetActive(true);
         }
         //make it so that it travels to the next scene/level
         nextSceneButton.SetActive(true);
