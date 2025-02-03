@@ -1,3 +1,2 @@
 # math-survivor
-unity college project
-discuss what's the problem here...
+Turn based zombie game that using multiple math answers to solve and beat the game
